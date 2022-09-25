@@ -18,7 +18,7 @@ while(webcam.isOpened()):
     #Convertimos imgagen a gris
     fotograma_gris = cv2.cvtColor(fotograma, cv2.COLOR_BGR2GRAY)
     #Detectar matriculas
-    matriculas = cascade_matricula.detectMultiScale(fotograma_gris, 1.1, 10)
+    matriculas = cascade_matricula.detectMultiScale(fotograma_gris, 1.1, 5, minSize=(25,25))
     waitkey = cv2.waitKey(20)
     #Analizamos matriculas
     for matricula in matriculas:
@@ -28,7 +28,7 @@ while(webcam.isOpened()):
         h = matricula[0]
         #Comprobamos area
         area = w*h
-        if area > 1000:   
+        if area > 100:   
             cv2.rectangle(fotograma, (x, y), (x+w, y+h), (255, 0, 0), thickness=3)
             imagen_recortada = fotograma[y:y+h, x:x+w]
             print(imagen_recortada)
